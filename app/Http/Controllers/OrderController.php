@@ -31,7 +31,7 @@ class OrderController extends Controller
             $currentUser = JWTAuth::parseToken()->authenticate();
             $order = Order::with(['lines'])->findOrFail($id);
             if ($order->user_id !== $currentUser->id) {
-                return Utis::returnError('You can only see your own orders', 403);
+                return Utils::returnError('You can only see your own orders', 403);
             }
             return Utils::returnData($order);
         } catch (\Exception $e) {  
@@ -69,14 +69,14 @@ class OrderController extends Controller
                 foreach($request->items as $item) {
                     $product = Product::find($item['id']);
                     $orderLine = new OrderLine();
-                    $orderLine->name = 
+                    $orderLine->name = $product->name;
                     $orderLine->unit_price = $product->price;
                     $orderLine->quantity = $item['quantity'];
                     $orderLine->total_price = $orderLine->unit_price * $orderLine->quantity;
                     $orderLine->product_id = $product->id;
                     $orderLine->order_id = $order->id;
                     $orderLine->save();
-                    $total =+ $orderLine->total_price;
+                    $total = $total + $orderLine->total_price;
                 }
                 $order->sub_total = $total;
                 $order->total = $order->sub_total + $deliveryFee;
