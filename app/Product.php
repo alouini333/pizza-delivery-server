@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $hidden = ['ingredients'];
+    protected $casts = [
+        'price' => 'float'
+    ];
     protected $appends = ['ingredient_names'];
     public function ingredients()
     {   
