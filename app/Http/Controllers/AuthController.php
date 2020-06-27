@@ -58,7 +58,7 @@ class AuthController extends Controller
             JWTAuth::guard()->logout();
             return Utils::returnSuccess('Logged out with success');
         } catch(\Exception $e) {
-            return \Utils::handleException($e);
+            return Utils::handleException($e);
         }
     }
 
