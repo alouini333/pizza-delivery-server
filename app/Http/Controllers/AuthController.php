@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use JWTAuth;
 use App\User;
 use App\Utils\Utils;
@@ -55,7 +56,7 @@ class AuthController extends Controller
     public function logout()
     {
         try {
-            JWTAuth::guard()->logout();
+            Auth::guard()->logout();
             return Utils::returnSuccess('Logged out with success');
         } catch(\Exception $e) {
             return Utils::handleException($e);
