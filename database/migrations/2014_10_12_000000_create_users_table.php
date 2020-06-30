@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone');
             $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('post_code')->nullable();
+            $table->string('floor')->nullable();
             $table->timestamps();
         });
     }

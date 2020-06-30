@@ -29,8 +29,12 @@ class StoreOrder extends FormRequest
             'items.*.quantity' => 'required|min:1',
             'name' => 'required|string',
             'last_name' => 'required|string',
+            'method' => 'required|in:cash,bitcoin,card',
             'phone' => 'required|string',
             'address' => 'required|string',
+            'post_code' => 'required|regex:/^\d{5}$/',
+            'city' => 'required|string',
+            'floor' => 'sometimes|nullable|string',
             'additional_notes' => 'sometimes|string|nullable'
         ];
     }

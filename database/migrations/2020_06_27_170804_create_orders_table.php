@@ -19,6 +19,10 @@ class CreateOrdersTable extends Migration
             $table->string('last_name');
             $table->string('phone');
             $table->text('address');
+            $table->string('city');
+            $table->string('post_code');
+            $table->string('floor')->nullable();
+            $table->enum('method', ['card', 'cash', 'bitcoin']);
             $table->float('sub_total', 8, 2)->default(0);
             $table->float('delivery_fees', 8, 2)->default(0);
             $table->float('total', 8, 2)->default(0);

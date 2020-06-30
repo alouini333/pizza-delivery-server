@@ -45,15 +45,18 @@ class OrderController extends Controller
                 $token = JWTAuth::getToken();
                 if ($token) {
                     $currentUser = JWTAuth::parseToken()->authenticate();
-                    if ($currentUser && $currentUser->address === null) {
+                    if ($currentUser) {
                         $currentUser->address = $request->address;
+                        $currentUser->city = $request->city;
+                        $currentUser->floor = $request->floor;
+                        $currentUser->post_code = $request->post_code;
                         $currentUser->save();
                     }
                 };
                 $deliveryFee = Setting::first()->delivery_fees;
 
                 $filteredRequest = $request->only([
-                    'name', 'last_name', 'additional_notes', 'phone', 'address'
+                    'name', 'last_name', 'additional_notes', 'phone', 'address', 'post_code', 'city', 'floor'
                 ]);
 
                 $order = new Order;
