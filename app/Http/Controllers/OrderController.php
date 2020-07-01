@@ -18,7 +18,7 @@ class OrderController extends Controller
     {   
         try {
             $currentUser = JWTAuth::parseToken()->authenticate();
-            $orders = Order::without(['lines'])->where('user_id', $currentUser->id)->get();
+            $orders = Order::without(['lines'])->where('user_id', $currentUser->id)->orderBy('created_at', 'DESC')->get();
             return Utils::returnData($orders);
         } catch (\Exception $e) {  
             return Utils::handleException($e);
